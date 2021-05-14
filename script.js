@@ -77,7 +77,7 @@ function generatePassword() {
 
 }
 
-//Collects a value from the user for their password length
+//Collects a value from the user for their password length between 8 and 128
 function askPasswordLength() {
   passwordLength = prompt("How many characters would you like your password to contain?", "Please enter a value between 8 and 128");
   
@@ -93,13 +93,11 @@ function askPasswordLength() {
 function guaranteePasswordContainsSets(passwordLength, sumOfSetChoices, userSetChoices, passwordRandomized) {
   var passwordChunk = Math.floor(passwordLength/sumOfSetChoices);
   var splitPassword = passwordRandomized.split("");
-  console.log("~ splitPassword", splitPassword);
   var skippedSet = 0;
 
   for (var i = 0; i < userSetChoices.length; i++ ) {
     if(userSetChoices[i]) {
       splitPassword[(passwordChunk*(i-skippedSet))+(Math.floor(Math.random()*passwordChunk))] = allCharacterSets[i][Math.floor(Math.random()*allCharacterSets[i].length)];
-      console.log("~ splitPassword", splitPassword);
     } else {
       skippedSet++;
     }
