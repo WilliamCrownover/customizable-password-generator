@@ -91,13 +91,15 @@ function askPasswordLength() {
 
 //Divide randomized password into segments and inserts a character from user selected sets in rare case they were not automatically included
 function guaranteePasswordContainsSets(passwordLength, sumOfSetChoices, userSetChoices, passwordRandomized) {
-  var passwordChunk = passwordLength/sumOfSetChoices;
+  var passwordChunk = Math.floor(passwordLength/sumOfSetChoices);
   var splitPassword = passwordRandomized.split("");
+  console.log("~ splitPassword", splitPassword);
   var skippedSet = 0;
 
   for (var i = 0; i < userSetChoices.length; i++ ) {
     if(userSetChoices[i]) {
       splitPassword[(passwordChunk*(i-skippedSet))+(Math.floor(Math.random()*passwordChunk))] = allCharacterSets[i][Math.floor(Math.random()*allCharacterSets[i].length)];
+      console.log("~ splitPassword", splitPassword);
     } else {
       skippedSet++;
     }
