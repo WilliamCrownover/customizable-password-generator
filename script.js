@@ -43,18 +43,25 @@ function generatePassword() {
   var passwordLength = askPasswordLength();
   var userSetChoices = [];
   var combinedCharacters = "";
+  var passwordRandomized = "";
 
   for (var i = 0; i < characterSetNames.length; i++) {
     userSetChoices[i] = confirm("Click OK to confirm including "+characterSetNames[i]+" characters.");
-    console.log("~ userSetChoices", userSetChoices);
+
     if (userSetChoices[i]) {
       combinedCharacters += allCharacterSets[i];
-      console.log("~ combinedCharacters", combinedCharacters);
     }
+
     if (i == characterSetNames.length-1 && combinedCharacters === "") {
       alert("Please include at least one set of characters to use.");
     }
   }
+
+  for (var i = 0; i < passwordLength; i++ ) {
+    passwordRandomized += combinedCharacters[Math.floor(Math.random()*combinedCharacters.length)]
+  }
+  console.log("~ passwordRandomized", passwordRandomized);
+  
   var reducer = (total,zero) => total + zero;
   console.log(userSetChoices.reduce(reducer));
 
