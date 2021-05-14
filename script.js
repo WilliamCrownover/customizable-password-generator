@@ -45,6 +45,10 @@ function generatePassword() {
   var combinedCharacters = "";
   var passwordRandomized = "";
 
+  if (passwordLength === "tryAgain") {
+    return "";
+  }
+
   for (var i = 0; i < characterSetNames.length; i++) {
     userSetChoices[i] = confirm("Click OK to confirm including "+characterSetNames[i]+" characters.");
 
@@ -63,7 +67,11 @@ function generatePassword() {
   console.log("~ passwordRandomized", passwordRandomized);
   
   var reducer = (total,zero) => total + zero;
-  console.log(userSetChoices.reduce(reducer));
+  var sumOfSetChoices = userSetChoices.reduce(reducer);
+
+  if (sumOfSetChoices === 1) {
+    return passwordRandomized;
+  }
 
 }
 
@@ -73,7 +81,7 @@ function askPasswordLength() {
   
   if (passwordLength < 8 || passwordLength > 128) {
     alert("Password length must be between 8 and 128 characters.");
-    return
+    return "tryAgain";
   } else {
     return passwordLength;
   }
