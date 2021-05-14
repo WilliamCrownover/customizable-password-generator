@@ -49,7 +49,7 @@ function generatePassword() {
     return "";
   }
 
-  for (var i = 0; i < characterSetNames.length; i++) {
+  for (var i = 0; i < characterSetNames.length; i++ ) {
     userSetChoices[i] = confirm("Click OK to confirm including "+characterSetNames[i]+" characters.");
 
     if (userSetChoices[i]) {
@@ -64,12 +64,14 @@ function generatePassword() {
   for (var i = 0; i < passwordLength; i++ ) {
     passwordRandomized += combinedCharacters[Math.floor(Math.random()*combinedCharacters.length)]
   }
-  console.log("~ passwordRandomized", passwordRandomized);
   
   var reducer = (total,zero) => total + zero;
   var sumOfSetChoices = userSetChoices.reduce(reducer);
 
   if (sumOfSetChoices === 1) {
+    return passwordRandomized;
+  } else {
+    passwordRandomized = guaranteePasswordContainsSets(passwordLength, sumOfSetChoices, userSetChoices, passwordRandomized);
     return passwordRandomized;
   }
 
@@ -85,4 +87,23 @@ function askPasswordLength() {
   } else {
     return passwordLength;
   }
+}
+
+//Divide randomized password into segments and inserts a character from user selected sets in rare case they were not automatically included
+function guaranteePasswordContainsSets(passwordLength, sumOfSetChoices, userSetChoices, passwordRandomized) {
+  var passwordChunk = passwordLength/sumOfSetChoices;
+  var splitPassword = passwordRandomized.split("");
+  var skippedSet = 0;
+
+  for (var i = 0; i < userSetChoices.length; i++ ) {
+    if(userSetChoices[i]) {
+      splitPassword[(passwordChunk*(i-skippedSet))+(Math.floor(Math.random()*passwordChunk))] = allCharacterSets[i][Math.floor(Math.random()*allCharacterSets[i].length)];
+    } else {
+      skippedSet++;
+    }
+  }
+
+  passwordRandomized = splitPassword.join("");
+
+  return passwordRandomized;
 }
