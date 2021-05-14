@@ -12,7 +12,6 @@ var allCharacterSets = [
   lowercaseCharacters,
   uppercaseCharacters
 ];
-console.log("~ allCharacterSets", allCharacterSets);
 
 //----------------------------------------------------------------------------
 // Assignment Code 
@@ -31,3 +30,21 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword);
 //----------------------------------------------------------------------------
 
+//Creates a character string to be sent back to writePassword(), var password
+function generatePassword() {
+  var passwordLength = askPasswordLength();
+
+  
+}
+
+//Collects a value from the user for their password length
+function askPasswordLength() {
+  passwordLength = prompt("How many characters would you like your password to contain?", "Please enter a value between 8 and 128");
+  
+  if (passwordLength < 8 || passwordLength > 128) {
+    alert("Password length must be between 8 and 128 characters.");
+    return
+  } else {
+    return passwordLength;
+  }
+}
