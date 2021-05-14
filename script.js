@@ -13,6 +13,14 @@ var allCharacterSets = [
   uppercaseCharacters
 ];
 
+//Character Set Names Stored in Array
+var characterSetNames = [
+  "special",
+  "numeric",
+  "lowercase",
+  "uppercase"
+]
+
 //----------------------------------------------------------------------------
 // Assignment Code 
 var generateBtn = document.querySelector("#generate");
@@ -33,8 +41,23 @@ generateBtn.addEventListener("click", writePassword);
 //Creates a character string to be sent back to writePassword(), var password
 function generatePassword() {
   var passwordLength = askPasswordLength();
+  var userSetChoices = [];
+  var combinedCharacters = "";
 
-  
+  for (var i = 0; i < characterSetNames.length; i++) {
+    userSetChoices[i] = confirm("Click OK to confirm including "+characterSetNames[i]+" characters.");
+    console.log("~ userSetChoices", userSetChoices);
+    if (userSetChoices[i]) {
+      combinedCharacters += allCharacterSets[i];
+      console.log("~ combinedCharacters", combinedCharacters);
+    }
+    if (i == characterSetNames.length-1 && combinedCharacters === "") {
+      alert("Please include at least one set of characters to use.");
+    }
+  }
+  var reducer = (total,zero) => total + zero;
+  console.log(userSetChoices.reduce(reducer));
+
 }
 
 //Collects a value from the user for their password length
