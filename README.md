@@ -1,7 +1,8 @@
 # Customizable Password Generator
 Taking in user inputs, this application outputs a random password fitting the selected criteria.
 
-## Pseudocode/User experience
+## Initial Pseudocode/User experience
+I created this outline of pseudocode as a foundation to guide my thought process as I worked through developing the JavaScript file. Some aspects of this pseudocode were not needed or altered as I ran tests in the development process.
 - Character data needed to generate a password can be stored in `allCharacterSets[]` which includes `specialCharacters`, `numericCharacters`, `lowercaseCharacters`, `uppercaseCharacters`
 - The user clicks the `generateBtn` to `writePassword()` to the text box
     - The program creates a `password` by using `generatePassword()` process
