@@ -1,5 +1,20 @@
 # Customizable Password Generator
-Taking in user inputs, this application outputs a random password fitting the selected criteria.
+
+## Description
+This project is a random password generator that takes user inputs for how long they would like their password to be and what types of characters should be used to make the password. The purpose of this project is to help quickly respond to security requests for stronger password protection. This could be used in a multitude of fields that work with sensitive data. The generator itself includes guarantee checks to make sure the randomized string of characters contains the requested character sets and delivers them using an intuitive user interface.
+
+This generator supports the following criteria
+- Can generate a password of length 8 to 128 character long
+- Must include one of the following characters sets or any combination of them
+    - Special Characters
+    - Numeric Characters
+    - Lowercase Characters
+    - Uppercase Characters
+
+## Live Site
+https://williamcrownover.github.io/customizable-password-generator/
+
+
 
 ## Initial Pseudocode/User experience
 I created this outline of pseudocode as a foundation to guide my thought process as I worked through developing the JavaScript file. Some aspects of this pseudocode were not needed or altered as I ran tests in the development process.
