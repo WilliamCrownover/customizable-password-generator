@@ -38,7 +38,7 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword);
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//Creates a character string to be sent back to writePassword(), var password
+//Creates a character string to be sent back to writePassword(), var `password`
 function generatePassword() {
   //The length of the password to create
   var passwordLength = askPasswordLength();
@@ -50,37 +50,31 @@ function generatePassword() {
     return "";
   }
 
-  //The users choices as to which character sets to use are stored here
-  var userSetChoices = [];
+  //The user's choices as to which character sets to use are stored here
+  var userCharacterSetChoices = chooseCharacterSets(characterSetNames.length);
+  
+
+  
   //One string holding all requested characters, starts with nothing
-  var combinedCharacters = "";
+  var combinedCharacters = combineRequestedCharacterSet(userCharacterSetChoices);
+  
+  
   //The randomized password string to return once guaranteed
   var passwordRandomized = "";
 
 
-  //If askPasswordLength() returned "tryAgain" the function stops and resets the process
-  if (!passwordLength) {
+  //Each time a user clicks "OK" the corresponding character set is added to `combinedCharacters`
+  if (userSetChoices[i]) {
+    combinedCharacters += allCharacterSets[i];
+  }
+  //On the fourth loop the combined string is checked to make sure at least one set was choosen
+  if (i == characterSetNames.length-1 && combinedCharacters === "") {
+    //If nothing was selected an alert informs the user to pick one character set
+    alert("Please include at least one set of characters to use.");
     //A blank string is sent back to the textbox
     return "";
   }
-
-  //Asks the user to choose what character sets they want to use
-  for (var i = 0; i < characterSetNames.length; i++ ) {
-    //Each of the four choices is stored in the array by retrieving a true or false using a confirm box
-    userSetChoices[i] = confirm("Click OK to confirm including "+characterSetNames[i]+" characters.");
-
-    //Each time a user clicks "OK" the corresponding character set is added to `combinedCharacters`
-    if (userSetChoices[i]) {
-      combinedCharacters += allCharacterSets[i];
-    }
-    //On the fourth loop the combined string is checked to make sure at least one set was choosen
-    if (i == characterSetNames.length-1 && combinedCharacters === "") {
-      //If nothing was selected an alert informs the user to pick one character set
-      alert("Please include at least one set of characters to use.");
-      //A blank string is sent back to the textbox
-      return "";
-    }
-  }
+  
 
   //A randomized password is generated adding characters to the string for the length requested
   for (var i = 0; i < passwordLength; i++ ) {
@@ -104,9 +98,23 @@ function generatePassword() {
 function askPasswordLength() { 
   //Using prompt immediately takes the user input value and assigns it to `length`
   var length = prompt("How many characters would you like your password to contain?", "Please enter a value between 8 and 128");
-  //The length is returned to generatePassword()
+  //The length is returned to `passwordLength` in generatePassword()
   return length;
 } 
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//Collects the users choices for which character sets to include in password generation and stores them in an array
+function chooseCharacterSets(numberOfCharacterSets) {
+  //Creating a new array to hold the choices 
+  var eachCharacterSetChoice = [];
+  //Asks the user to choose what character sets they want to use
+  for (var i = 0; i < numberOfCharacterSets; i++ ) {
+    //Each of the choices is stored in the array by retrieving a true or false using a confirm box
+    eachCharacterSetChoice[i] = confirm("Click OK to confirm including "+characterSetNames[i]+" characters.");
+  }
+  //The result is returned to array `userCharacterSetChoices` in generatePassword()
+  return eachCharacterSetChoice;
+}
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //Divide randomized password into segments and inserts a character from user selected sets in rare case they were not automatically included
