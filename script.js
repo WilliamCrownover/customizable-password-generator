@@ -67,21 +67,11 @@ function generatePassword() {
   //One string holding all requested character sets
   var combinedCharacterSets = combineRequestedCharacterSets(userCharacterSetChoices);
   
-
   //The randomized password string to return once guaranteed
-  var passwordRandomized = "";
+  var randomizedPasswordCharacters = assignRandomCharacters(passwordLength, combinedCharacterSets);
+  console.log("~ randomizedPasswordCharacters", randomizedPasswordCharacters);
 
   
-
-  //A randomized password is generated adding characters to the string for the length requested
-  for (var i = 0; i < passwordLength; i++ ) {
-    //Each random character is added to the end of the string
-    passwordRandomized += combinedCharacters[Math.floor(Math.random()*combinedCharacters.length)]
-  }
-  
-  var reducer = (total,zero) => total + zero;
-  var sumOfSetChoices = userSetChoices.reduce(reducer);
-
   if (sumOfSetChoices === 1) {
     return passwordRandomized;
   } else {
@@ -126,8 +116,24 @@ function combineRequestedCharacterSets(usersChoices) {
       addingCharacterSetsTogether += allCharacterSets[i];
     }
   }
-  //The result is returned to array `combinedCharacterSets` in generatePassword()
+  //The result is returned to string `combinedCharacterSets` in generatePassword()
   return addingCharacterSetsTogether;
+}
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//A randomized password is generated adding characters to the string for the length requested
+function assignRandomCharacters(length, characters) {
+  //An empty string to store random characters
+  var randomString = "";
+  //For the length of the password add a random character to the string
+  for (var i = 0; i < length; i++ ) {
+    //Pick a random character from the set
+    var randomCharacter = Math.floor(Math.random()*characters.length);
+    //Add random character to the end of the string
+    randomString += characters[randomCharacter];
+  }
+  //The result is returned to string `randomizedPasswordCharacters` in generatePassword()
+  return randomString;
 }
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
