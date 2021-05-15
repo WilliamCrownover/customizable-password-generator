@@ -52,28 +52,25 @@ function generatePassword() {
 
   //The user's choices as to which character sets to use are stored here
   var userCharacterSetChoices = chooseCharacterSets(characterSetNames.length);
+  //A function that when used with .reducer will add the total values of an array
+  var reducer = (total,zero) => total + zero;
+  //Adds the values of `userCharacterSetChoices` together
+  var sumOfUserCharacterSetChoices = userCharacterSetChoices.reduce(reducer);
+  //Triggers if no character sets were selected
+  if (sumOfUserCharacterSetChoices === 0) {
+    //Alert informs the user that they need to include at least one set of characters
+    alert("Please include at least one set of characters to use.");
+    //A blank string is sent back to the textbox and the user starts again
+    return "";
+  }
+
+  //One string holding all requested character sets
+  var combinedCharacterSets = combineRequestedCharacterSets(userCharacterSetChoices);
   
 
-  
-  //One string holding all requested characters, starts with nothing
-  var combinedCharacters = combineRequestedCharacterSet(userCharacterSetChoices);
-  
-  
   //The randomized password string to return once guaranteed
   var passwordRandomized = "";
 
-
-  //Each time a user clicks "OK" the corresponding character set is added to `combinedCharacters`
-  if (userSetChoices[i]) {
-    combinedCharacters += allCharacterSets[i];
-  }
-  //On the fourth loop the combined string is checked to make sure at least one set was choosen
-  if (i == characterSetNames.length-1 && combinedCharacters === "") {
-    //If nothing was selected an alert informs the user to pick one character set
-    alert("Please include at least one set of characters to use.");
-    //A blank string is sent back to the textbox
-    return "";
-  }
   
 
   //A randomized password is generated adding characters to the string for the length requested
@@ -114,6 +111,23 @@ function chooseCharacterSets(numberOfCharacterSets) {
   }
   //The result is returned to array `userCharacterSetChoices` in generatePassword()
   return eachCharacterSetChoice;
+}
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//Combines the individual sets of characters the user wants into one string value
+function combineRequestedCharacterSets(usersChoices) {
+  //Creating an empty string to hold the combined value
+  var addingCharacterSetsTogether = "";
+  //For each choice evaluate if the set should be combined into string
+  for (var i = 0; i < usersChoices.length; i++ ) {
+    //If "OK" was choosen
+    if (usersChoices[i]) {
+      //Add that set into string
+      addingCharacterSetsTogether += allCharacterSets[i];
+    }
+  }
+  //The result is returned to array `combinedCharacterSets` in generatePassword()
+  return addingCharacterSetsTogether;
 }
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
