@@ -31,7 +31,6 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
@@ -69,14 +68,17 @@ function generatePassword() {
   
   //The randomized password string to return once guaranteed
   var randomizedPasswordCharacters = assignRandomCharacters(passwordLength, combinedCharacterSets);
-  console.log("~ randomizedPasswordCharacters", randomizedPasswordCharacters);
 
-  
-  if (sumOfSetChoices === 1) {
-    return passwordRandomized;
+  //Check if the password needs to guarantee that each choosen character set was used
+  if (sumOfUserCharacterSetChoices === 1) {
+    //If one character set was used a guarantee is not needed and the randomized string is returned to `password` in writePassword()
+    return randomizedPasswordCharacters;
+  //Othersiwe more than one set was used
   } else {
-    passwordRandomized = guaranteePasswordContainsSets(passwordLength, sumOfSetChoices, userSetChoices, passwordRandomized);
-    return passwordRandomized;
+    //The randomized string needs to guarantee that at least one character from each set has been included
+    randomizedPasswordCharacters = guaranteePasswordContainsCharacterSets(passwordLength, sumOfUserCharacterSetChoices, userCharacterSetChoices, randomizedPasswordCharacters);
+    //The randomized characters are returned to `password` in writePassword()
+    return randomizedPasswordCharacters;
   }
 } 
 
@@ -138,20 +140,33 @@ function assignRandomCharacters(length, characters) {
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //Divide randomized password into segments and inserts a character from user selected sets in rare case they were not automatically included
-function guaranteePasswordContainsSets(passwordLength, sumOfSetChoices, userSetChoices, passwordRandomized) {
-  var passwordChunk = Math.floor(passwordLength/sumOfSetChoices);
-  var splitPassword = passwordRandomized.split("");
-  var skippedSet = 0;
-
-  for (var i = 0; i < userSetChoices.length; i++ ) {
-    if(userSetChoices[i]) {
-      splitPassword[(passwordChunk*(i-skippedSet))+(Math.floor(Math.random()*passwordChunk))] = allCharacterSets[i][Math.floor(Math.random()*allCharacterSets[i].length)];
+function guaranteePasswordContainsCharacterSets(length, sumOfChoices, userChoices, randomizedPassword) {
+  //The size of each part of the password to be evaluated and not overlap indices
+  var passwordChunk = Math.floor(length/sumOfChoices);
+  //Split the randomized characters into individual array indices to be replaced
+  var splitPasswordCharacters = randomizedPassword.split("");
+  //Used to skip over any character sets not choosen by the user
+  var unusedCharacterSets = 0;
+  //For each user choice guarantee that a specific character set was included
+  for (var i = 0; i < userChoices.length; i++ ) {
+    //If a character set was choosen
+    if(userChoices[i]) {
+      //Defines where a password chunk index range should start
+      var startOfPasswordChunk = (passwordChunk*(i-unusedCharacterSets));
+      //Sets an index value within range of the upper limit of a given password chunk
+      var randomPasswordChunkIndex = (Math.floor(Math.random()*passwordChunk));
+      //Pulls a random character from a choosen set to replace a character in the split password
+      var newCharacterFromSpecificSet = allCharacterSets[i][Math.floor(Math.random()*allCharacterSets[i].length)];
+      //Replaces a random character in range of the password chunk with a guaranteed character
+      splitPasswordCharacters[startOfPasswordChunk + randomPasswordChunkIndex] = newCharacterFromSpecificSet;
+    //Otherwise the character set wasn't used and the skipped value increases
     } else {
-      skippedSet++;
+      //Add one to number of sets unused
+      unusedCharacterSets++;
     }
   }
-
-  passwordRandomized = splitPassword.join("");
-
-  return passwordRandomized;
+  //The new randomized password is the result of joining the split characters back together
+  randomizedPassword = splitPasswordCharacters.join("");
+  //The result is returned to string `randomizedPasswordCharacters` in generatePassword()
+  return randomizedPassword;
 }
