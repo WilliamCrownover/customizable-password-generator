@@ -14,17 +14,17 @@ This generator supports the following criteria
 ## Live Site
 https://williamcrownover.github.io/customizable-password-generator/
 
-Inital Screen
+<strong>Inital Screen</strong>
 ![Generator Initial State](./Assets/Images/pwgStart.jpg)
-Asking for password length
+<strong>Asking for password length</strong>
 ![Asking for password length](./Assets/Images/pwgPasswordLength.jpg)
-One of four prompts for character sets
+<strong>One of four prompts for character sets</strong>
 ![Asking for character sets](./Assets/Images/pwgCharacterSet.jpg)
-A generated password
+<strong>A generated password</strong>
 ![A generated password](./Assets/Images/pwgPassword.jpg)
-If the user doesn't enter a proper password length
+<strong>If the user doesn't enter a proper password length</strong>
 ![Password length error](./Assets/Images/pwgLengthError.jpg)
-If the user doesn't select any character sets to use
+<strong>If the user doesn't select any character sets to use</strong>
 ![Character set error](./Assets/Images/pwgCharacterError.jpg)
 
 ## Initial Pseudocode/User experience
