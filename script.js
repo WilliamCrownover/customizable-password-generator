@@ -37,11 +37,11 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword);
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//Creates a character string to be sent back to writePassword(), var `password`
+//Creates a randomized character string to be sent back to `password` in writePassword()
 function generatePassword() {
-  //The length of the password to create
+  //Stores the length of the password to create
   var passwordLength = askPasswordLength();
-  //Check if the password length fits the constraints
+  //Check if the password length fits the constraints and is a number
   if (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {
     //Alert informs the user that the input was invalid
     alert("Password length must be a number between 8 and 128 characters.");
@@ -85,7 +85,7 @@ function generatePassword() {
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //Collects a value from the user for their password length
 function askPasswordLength() { 
-  //Using prompt immediately takes the user input value and assigns it to `length`
+  //Using prompt immediately takes the user input value and assigns it to `length`. Rounding floor eliminates erronious decimal places
   var length = Math.floor(prompt("How many characters would you like your password to contain?", "Please enter a value between 8 and 128"));
   //The length is returned to `passwordLength` in generatePassword()
   return length;
