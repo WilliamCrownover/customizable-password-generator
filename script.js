@@ -22,7 +22,7 @@ var characterSetNames = [
 ]
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// Assignment Code 
+// Assignment Code
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
@@ -42,9 +42,9 @@ function generatePassword() {
   //The length of the password to create
   var passwordLength = askPasswordLength();
   //Check if the password length fits the constraints
-  if (passwordLength < 8 || passwordLength > 128) {
+  if (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {
     //Alert informs the user that the input was invalid
-    alert("Password length must be between 8 and 128 characters.");
+    alert("Password length must be a number between 8 and 128 characters.");
     //A blank string is sent back to the textbox and the user starts again
     return "";
   }
@@ -86,7 +86,7 @@ function generatePassword() {
 //Collects a value from the user for their password length
 function askPasswordLength() { 
   //Using prompt immediately takes the user input value and assigns it to `length`
-  var length = prompt("How many characters would you like your password to contain?", "Please enter a value between 8 and 128");
+  var length = Math.floor(prompt("How many characters would you like your password to contain?", "Please enter a value between 8 and 128"));
   //The length is returned to `passwordLength` in generatePassword()
   return length;
 } 
