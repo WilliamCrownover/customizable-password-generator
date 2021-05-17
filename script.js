@@ -51,10 +51,9 @@ function generatePassword() {
 
   //The user's choices as to which character sets to use are stored here
   var userCharacterSetChoices = chooseCharacterSets(characterSetNames.length);
-  //A function that when used with .reducer will add the total values of an array
-  var reducer = (total,zero) => total + zero;
-  //Adds the values of `userCharacterSetChoices` together
-  var sumOfUserCharacterSetChoices = userCharacterSetChoices.reduce(reducer);
+
+  //Stores the value of `userCharacterSetChoices` as a sum total
+  var sumOfUserCharacterSetChoices = sumOfArray(userCharacterSetChoices);
   //Triggers if no character sets were selected
   if (sumOfUserCharacterSetChoices === 0) {
     //Alert informs the user that they need to include at least one set of characters
@@ -103,6 +102,21 @@ function chooseCharacterSets(numberOfCharacterSets) {
   }
   //The result is returned to array `userCharacterSetChoices` in generatePassword()
   return eachCharacterSetChoice;
+}
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//Adds the individual elements of an array into one sum
+function sumOfArray(array) {
+  //This will collect the total
+  var sum = 0;
+  //For each value in the array add it onto the total
+  for (var i = 0; i < array.length; i++ ) {
+    //The runnint total
+    sum += array[i];
+  }
+  //The result is returned to `sumOfUserCharacterSetChoices` in generatePassword()
+  console.log("~ sum", sum);
+  return sum;
 }
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
