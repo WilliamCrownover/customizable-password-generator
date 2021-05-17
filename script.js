@@ -115,7 +115,6 @@ function sumOfArray(array) {
     sum += array[i];
   }
   //The result is returned to `sumOfUserCharacterSetChoices` in generatePassword()
-  console.log("~ sum", sum);
   return sum;
 }
 
