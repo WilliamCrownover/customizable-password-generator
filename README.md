@@ -14,18 +14,10 @@ This generator supports the following criteria
 ## Live Site
 https://williamcrownover.github.io/customizable-password-generator/
 
-<strong>Inital Screen</strong>
-![Generator Initial State](./Assets/Images/pwgStart.jpg)
 <strong>Asking for password length</strong>
 ![Asking for password length](./Assets/Images/pwgPasswordLength.jpg)
-<strong>One of four prompts for character sets</strong>
-![Asking for character sets](./Assets/Images/pwgCharacterSet.jpg)
 <strong>A generated password</strong>
 ![A generated password](./Assets/Images/pwgPassword.jpg)
-<strong>If the user doesn't enter a proper password length</strong>
-![Password length error](./Assets/Images/pwgLengthError.jpg)
-<strong>If the user doesn't select any character sets to use</strong>
-![Character set error](./Assets/Images/pwgCharacterError.jpg)
 
 ## Initial Pseudocode/User experience
 I created this outline of pseudocode as a foundation to guide my thought process as I worked through developing the JavaScript file. Some aspects of this pseudocode were not needed or altered as I ran tests in the development process.
