@@ -1,5 +1,7 @@
 # Customizable Password Generator
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## Description
 This project is a random password generator that takes user inputs for how long they would like their password to be and what types of characters should be used to make the password. The purpose of this project is to help quickly respond to security requests for stronger password protection. This could be used in a multitude of fields that work with sensitive data. The generator itself includes guarantee checks to make sure the randomized string of characters contains the requested character sets and delivers them using an intuitive user interface.
 
@@ -10,6 +12,13 @@ This generator supports the following criteria
     - Numeric Characters
     - Lowercase Characters
     - Uppercase Characters
+
+## User Story
+```
+AS AN employee with access to sensitive data
+I WANT to randomly generate a password that meets certain criteria
+SO THAT I can create a strong password that provides greater security
+```
 
 ## Live Site
 https://williamcrownover.github.io/customizable-password-generator/
@@ -53,3 +62,13 @@ I created this outline of pseudocode as a foundation to guide my thought process
                     - Randomly replace a character with allCharacterSets[i] contained within range of `passwordChunk` multiplied by i plus `passwordChunk`
                 - Return the `password` to be presented to the user
         - The `password` is displayed in the text box on the website
+
+## License
+Licensed under the MIT License  - https://opensource.org/licenses/MIT
+
+## Contact
+
+If you have any questions you can email me at williamcrownover1@gmail.com.
+
+
+You can also check out my other work on GitHub at [WilliamCrownover](https://github.com/WilliamCrownover)
